@@ -1,0 +1,1 @@
+while [[ true ]] ; do ps -eo nlwp,rss,pid,cmd | grep java | grep qrCoder; sleep 10; clear;  done
