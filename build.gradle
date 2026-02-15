@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+}
+
+group = 'br.com.spedison'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Bibliotecas do ZXing para processamento de QR Code
+    implementation 'com.google.zxing:core:3.5.3'
+    implementation 'com.google.zxing:javase:3.5.3'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+jar {
+    archiveFileName = 'qrCoderService.jar'
+    manifest {
+        attributes(
+                'Main-Class': 'br.com.spedison.qrcoderservice.Main', // Nome exato da sua classe
+                // Define que o Class-Path procure na pasta lib ao lado do jar
+                'Class-Path': configurations.runtimeClasspath.files.collect { "lib/" + it.name }.join(' ')
+        )
+    }
+}
+
+
+// Tarefa para copiar as dependências para a pasta ./lib
+tasks.register('copyLibs', Copy) {
+    from configurations.runtimeClasspath
+    into "${buildDir}/libs/lib"
+}
+
+// Faz com que o jar dependa da cópia das libs
+build.dependsOn copyLibs
+
+
+test {
+    useJUnitPlatform()
+}
