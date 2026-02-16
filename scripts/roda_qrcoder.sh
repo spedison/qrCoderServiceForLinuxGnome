@@ -1,5 +1,5 @@
 $JAVA_HOME/bin/java \
--Xms4m -Xmx8m -XX:MaxMetaspaceSize=8m \
+-Xms4m -Xmx8m -XX:MaxMetaspaceSize=12m \
 -XX:ReservedCodeCacheSize=5m \
 -Xss256k -XX:+UseSerialGC \
 -Xint \
