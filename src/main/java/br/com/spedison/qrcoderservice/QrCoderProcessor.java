@@ -1,8 +1,10 @@
 package br.com.spedison.qrcoderservice;
 
+import br.com.spedison.qrcoderservice.utils.FormatToString;
 import com.google.zxing.*;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import lombok.extern.log4j.Log4j2;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -11,6 +13,8 @@ import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.Arrays;
 
+/*
+@Log4j2
 public class QrCoderProcessor {
 
     private byte[] lastHash;
@@ -26,6 +30,8 @@ public class QrCoderProcessor {
                 ByteArrayInputStream bais = new ByteArrayInputStream(imageData);
                 BufferedImage image = ImageIO.read(bais);
                 byte[] hashCurrent = computeHash(imageData);
+                String strCurrentHash = FormatToString.toString(hashCurrent);
+                log.debug("Hash atual : " + strCurrentHash);
 
                 if (image != null) {
 
@@ -77,3 +83,6 @@ public class QrCoderProcessor {
         return md.digest(data);
     }
 }
+
+
+ */

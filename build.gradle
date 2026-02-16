@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group = 'br.com.spedison'
@@ -9,14 +10,34 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    dbusGenerator
+}
+
 dependencies {
+    // Dependências para o gerador
+    dbusGenerator 'com.github.hypfvieh:dbus-java-utils:4.3.0'
+    dbusGenerator 'com.github.hypfvieh:dbus-java-osgi:4.3.0'
+
     // Bibliotecas do ZXing para processamento de QR Code
     implementation 'com.google.zxing:core:3.5.3'
     implementation 'com.google.zxing:javase:3.5.3'
+    implementation 'com.github.hypfvieh:dbus-java-osgi:4.3.0'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    compileOnly("org.projectlombok:lombok:1.18.42")
+    annotationProcessor("org.projectlombok:lombok:1.18.42")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.42")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.42")
+
+    // Source: https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    implementation("org.apache.logging.log4j:log4j-core:2.25.3")
+
+
 }
 
 jar {
@@ -44,3 +65,20 @@ build.dependsOn copyLibs
 test {
     useJUnitPlatform()
 }
+
+//task generateDbusInterfaces(type: JavaExec) {
+//    group = 'build'
+//    description = 'Gera interfaces Java a partir do XML do D-Bus do GNOME'
+//
+//    classpath = configurations.dbusGenerator
+//    mainClass = 'org.freedesktop.dbus.utils.generator.InterfaceCodeGenerator'
+//
+//    print( "Usando o XML :: ${projectDir}/gnome/gnome-dbus.xml")
+//
+//    args = [
+//            '--session',
+//            '--outputDir', "${projectDir}/src/main/java",
+//            '--inputFile', "${projectDir}/gnome/gnome-dbus.xml",
+//            '*' // Isso força a extração de todas as interfaces encontradas no XML
+//    ]
+//}

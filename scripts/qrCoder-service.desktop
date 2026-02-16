@@ -1,0 +1,12 @@
+#### $ cat ~/.config/autostart/qrcoder.desktop
+[Desktop Entry]
+Type=Application
+Name=QrCoderService
+Exec=/mnt/dados/git/QrCoderService/scripts/roda_qrcoder.sh
+Icon=utilities-terminal
+Hidden=false
+NoDisplay=false
+Terminal=false
+X-GNOME-Autostart-enabled=true
+Name=QrCoderService
+Comment=Monitor de QR Codes
